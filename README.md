@@ -14,23 +14,25 @@
 
 ## Текущая структура
 
-- `index.html` — самодостаточная версия магазина: HTML + CSS + JavaScript + встроенные demo-assets;
+- `index.html` — исходный self-contained baseline;
+- `public/index.html` — файл, который публикует Cloudflare Workers Static Assets;
+- `wrangler.jsonc` — конфигурация Workers Builds / Static Assets;
 - `AGENTS.md` — правила проекта и зафиксированный UI baseline;
 - `_headers` — security headers для Cloudflare Pages.
 
 На первом этапе страница намеренно self-contained, чтобы при первом подключении Cloudflare не возникли сломанные пути к изображениям. После визуального приёмочного прогона код можно разделить на `css/`, `js/`, `assets/`, не меняя внешний вид.
 
-## Cloudflare Pages
+## Cloudflare Workers Builds
 
-Для первого деплоя:
+Для текущего Cloudflare Workers & Pages мастера:
 
 - Production branch: `main`
-- Framework preset: **None**
+- Project name: `eva-print-website`
 - Build command: **пусто**
-- Build output directory: **корень репозитория**
-- Root directory: **/**
+- Deploy command: `npx wrangler deploy`
+- Preview command: `npx wrangler preview`
 
-Cloudflare должен публиковать `index.html` напрямую.
+`wrangler.jsonc` публикует статические файлы из `public/`. Основная production-страница: `public/index.html`.
 
 ## Функции демо
 
