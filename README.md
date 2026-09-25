@@ -1,38 +1,48 @@
 # Eva Print Pavlodar Website
 
-Отдельный статический сайт интернет-магазина **Eva Print Pavlodar**.
+Отдельный сайт интернет-магазина **Eva Print Pavlodar**.
 
 ## Назначение
 
 Демо и последующая production-версия магазина футболок, мерча и индивидуальной печати.
 
-Проект полностью отделён от Cardera и предназначен для самостоятельного деплоя через Cloudflare Pages / Workers & Pages.
+Проект полностью отделён от Cardera и разворачивается как самостоятельное приложение через Cloudflare Pages / Workers & Pages.
 
-## Стек
+## UI baseline
 
-- HTML5
-- CSS3
-- Vanilla JavaScript
-- без Node.js и обязательного build-step
-- mobile-first responsive layout
+Утверждённые пользователем desktop/mobile эскизы от 25.09.2026 являются обязательным визуальным baseline. Перед изменением интерфейса читать `AGENTS.md`.
 
-## Точки входа
+## Текущая структура
 
-- `index.html` — страница магазина
-- `css/style.css` — desktop/mobile интерфейс
-- `js/app.js` — корзина, избранное, mobile menu, загрузка макета
-- `data/products.json` — демонстрационный каталог
-- `AGENTS.md` — обязательные правила разработки и UI baseline
+- `index.html` — самодостаточная версия магазина: HTML + CSS + JavaScript + встроенные demo-assets;
+- `AGENTS.md` — правила проекта и зафиксированный UI baseline;
+- `_headers` — security headers для Cloudflare Pages.
+
+На первом этапе страница намеренно self-contained, чтобы при первом подключении Cloudflare не возникли сломанные пути к изображениям. После визуального приёмочного прогона код можно разделить на `css/`, `js/`, `assets/`, не меняя внешний вид.
 
 ## Cloudflare Pages
 
-Рекомендуемые параметры:
+Для первого деплоя:
 
-- Framework preset: None
-- Build command: оставить пустым
-- Build output directory: `/` (корень репозитория)
 - Production branch: `main`
+- Framework preset: **None**
+- Build command: **пусто**
+- Build output directory: **корень репозитория**
+- Root directory: **/**
 
-## Статус
+Cloudflare должен публиковать `index.html` напрямую.
 
-Первый baseline строится строго по утверждённым пользователем desktop/mobile эскизам Eva Print.
+## Функции демо
+
+- desktop layout по утверждённому образцу;
+- отдельная mobile-компоновка;
+- карточки товаров;
+- избранное;
+- корзина;
+- загрузка макета для своего принта;
+- блок категорий;
+- четыре шага заказа;
+- Instagram CTA;
+- нижний продающий CTA.
+
+Реальная оплата и отправка заказа пока не подключены.
